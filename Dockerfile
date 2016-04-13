@@ -9,7 +9,7 @@ ENV SHELL /bin/bash
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-RUN apt-get -q update && DEBIAN_FRONTEND=noninteractive apt-get -q -y install wget
+RUN apt-get -q update && DEBIAN_FRONTEND=noninteractive apt-get -q -y install wget curl
 
 RUN echo "deb http://packages.couchbase.com/ubuntu trusty trusty/main" > /etc/apt/sources.list.d/couchbase.list
 
@@ -28,8 +28,10 @@ RUN echo 'eval "$(rbenv init -)"' >> $HOME/.bashrc
 
 ENV RUBY_VERSION 2.3.0
 
+RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
+
 RUN apt-get update -q \
-  && apt-get -q -y install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev gcc g++ libcouchbase2-libevent libcouchbase-dev \
+  && apt-get -q -y install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev gcc g++ libcouchbase2-libevent libcouchbase-dev nodejs\
   && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists
 
