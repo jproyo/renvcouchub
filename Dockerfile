@@ -31,10 +31,16 @@ ENV RUBY_VERSION 2.3.0
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
 
 RUN apt-get update -q \
-  && apt-get -q -y install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev gcc g++ libcouchbase2-libevent libcouchbase-dev nodejs python3\
+  && apt-get -q -y install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev gcc g++ libcouchbase2-libevent libcouchbase-dev nodejs\
   && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists
 
-RUN rbenv install $RUBY_VERSION && rbenv global $RUBY_VERSION
+RUN wget -O - http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tgz | tar zxf - \
+  && ./Python-2.7.3/configure \
+  && make \
+  && make install
+
+RUN rbenv install $RUBY_VERSION
+RUN rbenv global $RUBY_VERSION
 
 RUN rbenv rehash
