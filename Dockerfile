@@ -31,7 +31,7 @@ ENV RUBY_VERSION 2.3.0
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
 
 RUN apt-get update -q \
-  && apt-get -q -y install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev gcc g++ libcouchbase2-libevent libcouchbase-dev nodejs\
+  && apt-get -q -y install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev gcc g++ libcouchbase2-libevent libcouchbase-dev nodejs python3\
   && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists
 
